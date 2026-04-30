@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 import './About.css';
 
 const About = () => {
+  const { settings } = useContext(ThemeContext);
   return (
     <div className="about-page-container">
       <div className="about-page-header">
@@ -29,15 +31,9 @@ const About = () => {
           transition={{ duration: 0.8 }}
         >
           <h3 className="section-subtitle">Mediterranean & International Cuisine</h3>
-          <p className="lead-text">
-            Born from the vision of a dreamer from Greece, The Fig & Olive brings the Mediterranean spirit to the Isle of Man. 
-            Our amazing team have created a menu without geographical restrictions, marrying classic Mediterranean, 
-            Asian and international flavours for the most imaginative and unexpected dishes.
-          </p>
-          <p>
-            His and our philosophy: the desire to please and excite the palate, captivate and deeply satisfy all five senses 
-            by fusing everyday cooking with modern quality ingredients from around the world.
-          </p>
+          <div className="lead-text" style={{ whiteSpace: 'pre-line', fontSize: '1.1rem', lineHeight: '1.8' }}>
+            {settings.aboutUsText}
+          </div>
         </motion.div>
 
         <div className="about-grid">

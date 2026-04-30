@@ -79,12 +79,17 @@ const Admin = () => {
   };
 
   // Handle Theme Settings Update
-  const handleThemeUpdate = (e) => {
+  const handleThemeUpdate = async (e) => {
     e.preventDefault();
-    setSettings(themeForm);
-    document.documentElement.style.setProperty('--primary-color', themeForm.themeColor);
-    document.title = themeForm.restaurantName;
-    alert('Branding updated successfully!');
+    try {
+      const res = await api.post('/settings', themeForm);
+      setSettings(res.data);
+      document.documentElement.style.setProperty('--primary-color', res.data.themeColor);
+      document.title = res.data.restaurantName;
+      alert('Settings updated successfully!');
+    } catch (err) {
+      alert('Failed to save settings. Make sure you are logged in as admin.');
+    }
   };
 
   // Handle Booking Status
@@ -703,6 +708,82 @@ const Admin = () => {
                 </tbody>
               </table>
             </div>
+          </motion.div>
+        )}
+
+        {/* SETTINGS TAB */}
+        {activeTab === 'settings' && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="admin-panel-card">
+            <div className="admin-panel-header">
+              <h2>Store Settings</h2>
+            </div>
+            <form onSubmit={handleThemeUpdate} className="admin-grid-form">
+              <div className="admin-form-group">
+                <label>Restaurant Name</label>
+                <input 
+                  type="text" 
+                  className="admin-input"
+                  value={themeForm.restaurantName || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, restaurantName: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group">
+                <label>Theme Color</label>
+                <div className="color-picker-row">
+                  <input 
+                    type="color" 
+                    className="color-input"
+                    value={themeForm.themeColor || '#7b8c5a'} 
+                    onChange={(e) => setThemeForm({...themeForm, themeColor: e.target.value})}
+                  />
+                  <input 
+                    type="text" 
+                    className="admin-input"
+                    value={themeForm.themeColor || '#7b8c5a'} 
+                    onChange={(e) => setThemeForm({...themeForm, themeColor: e.target.value})}
+                  />
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label>Contact Phone</label>
+                <input 
+                  type="text" 
+                  className="admin-input"
+                  value={themeForm.contactPhone || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, contactPhone: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group">
+                <label>Contact Email</label>
+                <input 
+                  type="email" 
+                  className="admin-input"
+                  value={themeForm.contactEmail || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, contactEmail: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>Restaurant Address</label>
+                <input 
+                  type="text" 
+                  className="admin-input"
+                  value={themeForm.address || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, address: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>About Us Text (Displayed on About Page)</label>
+                <textarea 
+                  className="admin-input"
+                  rows="5"
+                  value={themeForm.aboutUsText || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, aboutUsText: e.target.value})}
+                />
+              </div>
+              <div className="form-footer">
+                <button type="submit" className="btn-admin-primary">Save Settings</button>
+              </div>
+            </form>
           </motion.div>
         )}
 
