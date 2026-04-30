@@ -18,7 +18,7 @@
 }
 
 body {
-  font-family: 'Sacramento', cursive;
+  font-family: 'Oregon Point Handwritten Font', 'Caveat', cursive;
   font-size: 1.2rem; /* Sacramento needs larger base size */
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -29,9 +29,14 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Sacramento', cursive;
+  font-family: 'Strongvilla Handrawn Typeface', 'Great Vibes', cursive;
   font-weight: 500;
   letter-spacing: 1px;
+}
+
+.text-logo {
+  font-family: 'Strongvilla Handrawn Typeface', 'Great Vibes', cursive !important;
+  font-size: 1.8rem;
 }
 
 /* Glassmorphism replaced with Luxury Clean Cards */

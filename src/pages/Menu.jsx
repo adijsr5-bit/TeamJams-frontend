@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Heart } from 'lucide-react';
 import api, { BASE_URL } from '../services/api';
 import { CartContext } from '../context/CartContext';
+import { FavoritesContext } from '../context/FavoritesContext';
 import './Menu.css';
 
 const Menu = () => {
@@ -10,6 +11,7 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState('All');
   const { addToCart } = useContext(CartContext);
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
 
 
 
@@ -97,9 +99,27 @@ const Menu = () => {
                       <span className="card-price">${item.price.toFixed(2)}</span>
                     </div>
                     <p className="card-desc">{item.description}</p>
-                    <button className="add-to-cart-btn" onClick={() => addToCart(item)}>
-                      <ShoppingBag size={18} /> Add to Cart
-                    </button>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+                      <button className="add-to-cart-btn" onClick={() => addToCart(item)} style={{ flex: 1 }}>
+                        <ShoppingBag size={18} /> Add to Cart
+                      </button>
+                      <button 
+                        onClick={() => toggleFavorite(item)}
+                        style={{
+                          background: 'transparent',
+                          border: '1px solid var(--card-border)',
+                          borderRadius: '2px',
+                          width: '45px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          color: 'var(--primary-color)'
+                        }}
+                      >
+                        <Heart size={20} fill={isFavorite(item._id) ? "var(--primary-color)" : "none"} color="var(--primary-color)" />
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               )})
