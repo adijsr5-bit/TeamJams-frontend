@@ -16,7 +16,11 @@ const Book = () => {
     specialRequests: '',
   });
 
-  const availableTimes = ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'];
+  const availableTimes = [];
+  for (let i = 8; i <= 23; i++) {
+    availableTimes.push(`${i.toString().padStart(2, '0')}:00`);
+    if (i !== 23) availableTimes.push(`${i.toString().padStart(2, '0')}:30`);
+  }
 
   const handleChange = (e) => {
     setBookingData({ ...bookingData, [e.target.name]: e.target.value });

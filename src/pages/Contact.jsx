@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import api from '../services/api';
 import './Contact.css';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Contact = () => {
+  const { settings } = useContext(ThemeContext);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
 
@@ -48,22 +50,22 @@ const Contact = () => {
             <h2>Get in Touch</h2>
             <div className="divider-left"></div>
             <p className="contact-desc">
-              Whether you have a question about our menu, reservations, or special events, our team is ready to answer all your questions.
+              {settings.contactText}
             </p>
             
             <div className="info-block">
               <h3>Address</h3>
-              <p>13-15 Castle Street<br/>Douglas, IM1 2EX</p>
+              <p style={{whiteSpace: 'pre-line'}}>{settings.address}</p>
             </div>
             
             <div className="info-block">
               <h3>Contact Info</h3>
-              <p>Phone: xxxxxx<br/>Email: info@figandolive.im</p>
+              <p>Phone: {settings.contactPhone}<br/>Email: {settings.contactEmail}</p>
             </div>
             
             <div className="info-block">
               <h3>Opening Hours</h3>
-              <p>Mon - Sun: 12:00 PM - 10:00 PM</p>
+              <p>{settings.openingHours}</p>
             </div>
           </motion.div>
 

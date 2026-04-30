@@ -109,7 +109,7 @@ const CartPanel = () => {
                   {orderDetails.orderType === 'dine-in' && (
                     <div className="form-group">
                       <label>Table Number</label>
-                      <input type="text" required className="input-field" value={orderDetails.tableNumber} onChange={(e) => setOrderDetails({...orderDetails, tableNumber: e.target.value})} />
+                      <input type="number" required className="input-field" value={orderDetails.tableNumber} onChange={(e) => setOrderDetails({...orderDetails, tableNumber: e.target.value})} />
                     </div>
                   )}
                   <div className="form-group">

@@ -808,6 +808,24 @@ const Admin = () => {
                 />
               </div>
               <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>Opening Hours</label>
+                <input 
+                  type="text" 
+                  className="admin-input"
+                  value={themeForm.openingHours || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, openingHours: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>Contact Page Intro Text</label>
+                <textarea 
+                  className="admin-input"
+                  rows="3"
+                  value={themeForm.contactText || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, contactText: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
                 <label>About Us - Intro (Mediterranean & International Cuisine)</label>
                 <textarea 
                   className="admin-input"
