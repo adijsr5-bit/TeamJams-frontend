@@ -41,7 +41,7 @@ const Admin = () => {
 
   const [orders, setOrders] = useState([]);
   const prevOrderCountRef = useRef(0);
-  const audioRef = useRef(new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg'));
+  const audioRef = useRef(new Audio('https://actions.google.com/sounds/v1/alarms/telephone_ring.ogg'));
 
   // Fetch Menu, Bookings, Orders
   useEffect(() => {
@@ -104,7 +104,7 @@ const Admin = () => {
   const handleThemeUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post('/settings', themeForm);
+      const res = await api.put('/settings', themeForm);
       setSettings(res.data);
       document.documentElement.style.setProperty('--primary-color', res.data.themeColor);
       document.title = res.data.restaurantName;
@@ -794,12 +794,30 @@ const Admin = () => {
                 />
               </div>
               <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
-                <label>About Us Text (Displayed on About Page)</label>
+                <label>About Us - Intro (Mediterranean & International Cuisine)</label>
+                <textarea 
+                  className="admin-input"
+                  rows="3"
+                  value={themeForm.aboutUsText || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, aboutUsText: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>About Us - Middle Section</label>
                 <textarea 
                   className="admin-input"
                   rows="5"
-                  value={themeForm.aboutUsText || ''} 
-                  onChange={(e) => setThemeForm({...themeForm, aboutUsText: e.target.value})}
+                  value={themeForm.aboutUsSection1 || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, aboutUsSection1: e.target.value})}
+                />
+              </div>
+              <div className="admin-form-group" style={{ gridColumn: '1 / -1' }}>
+                <label>About Us - Final Section (We aim to please everyone)</label>
+                <textarea 
+                  className="admin-input"
+                  rows="5"
+                  value={themeForm.aboutUsSection2 || ''} 
+                  onChange={(e) => setThemeForm({...themeForm, aboutUsSection2: e.target.value})}
                 />
               </div>
               <div className="form-footer">

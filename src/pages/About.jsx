@@ -55,21 +55,9 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p>
-              On our menu you will find old favourites from when we began all those years ago alongside new seasonal dishes 
-              and specials from the new ingredients that are delivered daily into our kitchen.
-            </p>
-            <p>
-              Our menu changes regularly following the seasons and is alive with sunbaked tastes and aromas, radiating all 
-              the colours and textures of the sea and the land, and brimming with the mood of the Med.
-            </p>
-            <p className="highlight-text">
-              Every dish is cooked to order. We are not fussy, just skilled, imaginative and full of the unexpected.
-            </p>
-            <p>
-              Our mission is to delight and surprise and ensure everybody walks out with a smile on their face, 
-              wondering when they can do it all again!
-            </p>
+            <div style={{ whiteSpace: 'pre-line', fontSize: '1.05rem', lineHeight: '1.8' }}>
+              {settings.aboutUsSection1}
+            </div>
           </motion.div>
         </div>
 
@@ -81,19 +69,9 @@ const About = () => {
           transition={{ duration: 0.8 }}
         >
           <h3 className="section-subtitle">We aim to please everyone</h3>
-          <p>
-            Whether it’s a romantic dinner for two or a larger group, The Fig & Olive has so much to offer including our 
-            à la carte menu, young guest menu, lunch and brunch menus, dedicated vegan menu, gluten free and vegetarian 
-            options, blackboard specials and bespoke party menus. This ensures there is something for every budget.
-          </p>
-          <p>
-            In addition, the expertly chosen wine list offers exceptional value with a wide selection of wines, 
-            with several available to purchase by the glass.
-          </p>
-          <p>
-            We also have a wide range of trendy cocktails, premium spirits, Davison’s Manx ice cream and a homemade 
-            dessert menu to die for!!!
-          </p>
+          <div style={{ whiteSpace: 'pre-line', fontSize: '1.05rem', lineHeight: '1.8', maxWidth: '800px', margin: '0 auto' }}>
+            {settings.aboutUsSection2}
+          </div>
           <div className="mt-4" style={{ marginTop: '30px' }}>
              <Link to="/book" className="btn-primary">Book your table</Link>
           </div>
