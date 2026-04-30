@@ -40,6 +40,8 @@ const Admin = () => {
   const homeImageFileInputRef = useRef(null);
 
   const [orders, setOrders] = useState([]);
+  const prevOrderCountRef = useRef(0);
+  const audioRef = useRef(new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg'));
 
   // Fetch Menu, Bookings, Orders
   useEffect(() => {
@@ -66,6 +68,26 @@ const Admin = () => {
       }
     };
     fetchData();
+
+    // Polling for new orders every 15 seconds
+    const intervalId = setInterval(async () => {
+      try {
+        const res = await api.get('/orders');
+        if (res.data) {
+          setOrders(prevOrders => {
+            if (res.data.length > prevOrders.length) {
+              // New order arrived! Play sound.
+              audioRef.current.play().catch(e => console.log('Audio play failed (browser policy)', e));
+            }
+            return res.data;
+          });
+        }
+      } catch (e) {
+        // silently ignore polling errors
+      }
+    }, 15000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const updateOrderStatus = async (id, newStatus) => {

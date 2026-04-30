@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, Heart, LogOut } from 'lucide-react';
-import api from '../services/api';
+import api, { BASE_URL } from '../services/api';
+import { FavoritesContext } from '../context/FavoritesContext';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -12,7 +13,7 @@ const Dashboard = () => {
   });
   
   const [bookings, setBookings] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,12 +28,10 @@ const Dashboard = () => {
         const bookingsRes = await api.get('/bookings/my-bookings');
         setBookings(bookingsRes.data);
         
-        setFavorites([]); // Favorites not implemented yet in backend
         setLoading(false);
       } catch (error) {
         console.warn("Failed to fetch dashboard data", error);
         setBookings([]);
-        setFavorites([]);
         setLoading(false);
       }
     };
@@ -173,7 +172,7 @@ const Dashboard = () => {
                           <p className="fav-name">{item.name}</p>
                           <p className="fav-price">${item.price.toFixed(2)}</p>
                         </div>
-                        <button className="btn-icon"><Heart size={16} fill="var(--primary-color)" color="var(--primary-color)"/></button>
+                        <button className="btn-icon" onClick={() => toggleFavorite(item)}><Heart size={16} fill="var(--primary-color)" color="var(--primary-color)"/></button>
                       </div>
                     )})}
                   </div>

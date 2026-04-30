@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Menu as MenuIcon, X, Heart } from 'lucide-react';
+import { ShoppingBag, Menu as MenuIcon, X } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
 import { CartContext } from '../context/CartContext';
-import { FavoritesContext } from '../context/FavoritesContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const { settings } = useContext(ThemeContext);
   const { cartCount, toggleCart } = useContext(CartContext);
-  const { favorites } = useContext(FavoritesContext);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -55,10 +53,6 @@ const Navbar = () => {
           </ul>
           
           <div className="nav-actions">
-            <Link to="/favorites" className="cart-btn" style={{ marginRight: '15px', color: 'var(--text-color)' }}>
-              <Heart size={20} fill={favorites.length > 0 ? "var(--primary-color)" : "none"} color={favorites.length > 0 ? "var(--primary-color)" : "currentColor"} />
-              {favorites.length > 0 && <span className="cart-badge">{favorites.length}</span>}
-            </Link>
             <button className="cart-btn" onClick={toggleCart}>
               <ShoppingBag size={20} />
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
@@ -67,9 +61,6 @@ const Navbar = () => {
         </div>
 
         <div className="mobile-menu-toggle">
-          <Link to="/favorites" className="cart-btn-mobile" style={{ marginRight: '15px', color: 'var(--text-color)' }}>
-            <Heart size={20} fill={favorites.length > 0 ? "var(--primary-color)" : "none"} color={favorites.length > 0 ? "var(--primary-color)" : "currentColor"} />
-          </Link>
           <button className="cart-btn-mobile" onClick={toggleCart}>
             <ShoppingBag size={20} />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
@@ -85,7 +76,6 @@ const Navbar = () => {
         <ul className="mobile-links">
           <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
           <li><Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link></li>
-          <li><Link to="/favorites" onClick={() => setMobileMenuOpen(false)}>Favorites</Link></li>
           <li><Link to="/book" onClick={() => setMobileMenuOpen(false)}>Reservations</Link></li>
           <li><Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link></li>
           {isLoggedIn ? (

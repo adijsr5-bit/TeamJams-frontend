@@ -12,7 +12,6 @@ import Book from './pages/Book';
 import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
 import Contact from './pages/Contact';
-import Favorites from './pages/Favorites';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
@@ -32,7 +31,6 @@ function App() {
             <Route path="/book" element={<Book />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/favorites" element={<Favorites />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
