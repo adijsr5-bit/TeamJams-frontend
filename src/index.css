@@ -18,8 +18,8 @@
 }
 
 body {
-  font-family: 'Oregon Point Handwritten Font', 'Caveat', cursive;
-  font-size: 1.2rem; /* Sacramento needs larger base size */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
   background-color: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
@@ -37,13 +37,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Strongvilla Handrawn Typeface', 'Great Vibes', cursive;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   letter-spacing: 1px;
 }
 
 .text-logo {
-  font-family: 'Strongvilla Handrawn Typeface', 'Great Vibes', cursive !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-size: 1.8rem;
 }
 
