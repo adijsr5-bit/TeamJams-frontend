@@ -88,8 +88,8 @@
 /* Luxury Menu Grid */
 .luxury-menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
 }
 
 .luxury-menu-card {

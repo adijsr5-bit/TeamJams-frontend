@@ -213,6 +213,14 @@
   .home-booking-form .form-row {
     flex-direction: column;
   }
+  
+  .home-booking-card {
+    padding: 30px 20px;
+  }
+  
+  .home-booking-section {
+    padding: 60px 15px;
+  }
 }
 
 .home-booking-section {
