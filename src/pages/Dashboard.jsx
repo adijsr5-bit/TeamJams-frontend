@@ -167,7 +167,14 @@ const Dashboard = () => {
                       const imageUrl = item.image?.startsWith('/uploads') ? `${BASE_URL}${item.image}` : (item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80');
                       return (
                       <div key={item._id} className="favorite-item">
-                        <img src={imageUrl} alt={item.name} onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'} />
+                        <img 
+                          src={imageUrl} 
+                          alt={item.name} 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80';
+                          }} 
+                        />
                         <div className="fav-details">
                           <p className="fav-name">{item.name}</p>
                           <p className="fav-price">${item.price.toFixed(2)}</p>

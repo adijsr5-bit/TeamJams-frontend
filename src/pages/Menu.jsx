@@ -91,7 +91,14 @@ const Menu = () => {
                   transition={{ duration: 0.4 }}
                 >
                   <div className="card-img-wrapper">
-                    <img src={imageUrl} alt={item.name} onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'} />
+                    <img 
+                      src={imageUrl} 
+                      alt={item.name} 
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80';
+                      }} 
+                    />
                   </div>
                   <div className="card-content">
                     <div className="card-header-row">
