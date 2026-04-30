@@ -367,6 +367,7 @@ const Admin = () => {
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Type</th>
+                    <th>Items</th>
                     <th>Total</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -376,11 +377,24 @@ const Admin = () => {
                   {orders.map(order => (
                     <tr key={order._id}>
                       <td data-label="Order ID" className="text-muted">#{order._id.substring(order._id.length - 6)}</td>
-                      <td data-label="Customer" className="font-medium">Guest</td>
+                      <td data-label="Customer" className="font-medium">{order.customerName || 'Guest'}</td>
                       <td data-label="Type">
                         <span style={{textTransform: 'capitalize'}}>{order.orderType || 'Walk-in'}</span>
                         {order.orderType === 'dine-in' && order.tableNumber && (
                           <div className="text-muted text-sm">Table {order.tableNumber}</div>
+                        )}
+                      </td>
+                      <td data-label="Items">
+                        {order.items && order.items.length > 0 ? (
+                          <ul style={{ paddingLeft: '15px', margin: 0, fontSize: '0.85em', color: 'var(--text-color)' }}>
+                            {order.items.map((item, idx) => (
+                              <li key={idx}>
+                                {item.quantity}x {item.menuItem ? item.menuItem.name : 'Unknown Item'}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <span className="text-muted text-sm">No items</span>
                         )}
                       </td>
                       <td data-label="Total" className="text-primary font-bold">${order.totalAmount?.toFixed(2)}</td>
@@ -411,7 +425,7 @@ const Admin = () => {
                     </tr>
                   ))}
                   {orders.length === 0 && (
-                    <tr><td colSpan="6" className="text-center py-4">No recent orders.</td></tr>
+                    <tr><td colSpan="7" className="text-center py-4">No recent orders.</td></tr>
                   )}
                 </tbody>
               </table>
