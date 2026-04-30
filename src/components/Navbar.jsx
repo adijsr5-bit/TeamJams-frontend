@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu as MenuIcon, X } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
@@ -9,19 +9,46 @@ const Navbar = () => {
   const { settings } = useContext(ThemeContext);
   const { cartCount, toggleCart } = useContext(CartContext);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+        setHidden(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        setHidden(false);
+      }
+      
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const isHome = location.pathname === '/';
-  const navClass = scrolled || !isHome ? 'navbar solid' : 'navbar transparent';
+  
+  let navClass = 'navbar';
+  if (scrolled || !isHome) {
+    navClass += ' navbar-scrolled';
+  } else {
+    navClass += ' transparent';
+  }
+  
+  if (hidden && !mobileMenuOpen) {
+    navClass += ' navbar-hidden';
+  }
   const isLoggedIn = !!localStorage.getItem('token');
 
   const toggleMobileMenu = () => {
